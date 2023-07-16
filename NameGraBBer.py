@@ -1,5 +1,6 @@
-# TODO: test gamma
 # TODO: add error handling
+# TODO: remove 1000 chatter limit
+# TODO: test gamma
 
 import requests
 import json
