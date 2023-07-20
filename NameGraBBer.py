@@ -83,9 +83,7 @@ def update_name_amount(entry_amount):
 
     with open("reference_system.ltx", "r") as in_file:
         lines = in_file.readlines()
-        lines[463] = (
-            "last_name_cnt                            = " + str(entry_amount) + "\n"
-        )
+        lines[463] = ("last_name_cnt                            = " + str(entry_amount) + "\n")
 
     with open("gamedata/configs/system.ltx", "w") as out_file:
         for line in lines:
