@@ -1,7 +1,6 @@
 # TODO: remove 1,000 chatter limit
 
 import requests
-import json
 
 
 class NameGraBBer:
