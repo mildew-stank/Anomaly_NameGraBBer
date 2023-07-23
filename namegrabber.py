@@ -1,5 +1,3 @@
-# TODO: remove 1,000 chatter limit
-
 import requests
 
 
@@ -7,6 +5,7 @@ class NameGraBBer:
     def __init__(self, client_id, access_token):
         self.client_id = client_id
         self.access_token = access_token
+        self.names = []
 
     def get_user_id_from_access_token(self):
         headers = {
@@ -25,7 +24,7 @@ class NameGraBBer:
 
         return data["data"][0]["id"]
 
-    def get_chat_names_from_user_id(self, user_id):
+    def get_chat_names_from_user_id(self, user_id, pagination_cursor = ""):
         headers = {
             "Authorization": "Bearer " + str(self.access_token),
             "Client-Id": str(self.client_id),
@@ -35,6 +34,7 @@ class NameGraBBer:
             "broadcaster_id": str(user_id),  # user is the streamer
             "moderator_id": str(user_id),
             "first": 1000,
+            "after": str(pagination_cursor),
         }
 
         try:
@@ -45,9 +45,13 @@ class NameGraBBer:
             raise SystemExit(error)
 
         data = response.json()
-        names = []
+
+        if data["pagination"]:
+            print("Page limit reached, sending new request...")
+            pagination_cursor = data["pagination"]["cursor"]
+            self.get_chat_names_from_user_id(user_id, pagination_cursor)
 
         for entry in data["data"]:
-            names.append(entry["user_name"])
+            self.names.append(entry["user_name"])
 
-        return names
+        return self.names
