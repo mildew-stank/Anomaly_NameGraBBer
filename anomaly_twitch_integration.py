@@ -1,5 +1,3 @@
-# TODO: check gamma compatibility
-
 import xml.etree.ElementTree as xml_element_tree
 import namegrabber
 
@@ -64,13 +62,9 @@ def main():
     names = name_grabber.get_chat_names_from_user_id(user_id)
     names_added = add_twitch_names(names)
 
-    if names_added >= 1000:
-        print("Current name limit exceeded. Only the first 1000 were added, in alphabetical order")
-    else:
-        print("Names added: " + str(names_added))
-
+    print("Names added: " + str(names_added))
     print("Start a new game to populate the world with updated names")
-    input()
+    print("")
 
 
 if __name__ == "__main__":
