@@ -18,7 +18,7 @@ class NameGraBBer:
             response.raise_for_status()
         except requests.exceptions.RequestException as error:
             print("Twitch API request error occured while attempting to access users: ")
-            raise SystemExit(error)
+            self.display_error(error)
 
         data = response.json()
 
@@ -42,7 +42,7 @@ class NameGraBBer:
             response.raise_for_status()
         except requests.exceptions.RequestException as error:
             print("Twitch API request error occured while attempting to access chatters: ")
-            raise SystemExit(error)
+            self.display_error(error)
 
         data = response.json()
 
@@ -55,3 +55,8 @@ class NameGraBBer:
             self.names.append(entry["user_name"])
 
         return self.names
+    
+    def display_error(self, error):
+        print(error)
+        input()
+        raise SystemExit()
