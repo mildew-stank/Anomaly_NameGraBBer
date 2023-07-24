@@ -10,7 +10,7 @@ def add_twitch_names(names):
         root = tree.getroot()
     except IOError as error:
         print("File reference_generate_snames.xml not found: ")
-        raise SystemExit(error)
+        display_error(error)
 
     for name in names:
         entry_amount += 1  # this occurs here because update_name_amount needs the one-indexed number
@@ -38,7 +38,7 @@ def update_name_amount(entry_amount):
             lines[463] = ("last_name_cnt                            = " + str(entry_amount) + "\n")
     except IOError as error:
         print("File gamedata/configs/system.ltx not found: ")
-        raise SystemExit(error)
+        display_error(error)
 
     with open("gamedata/configs/system.ltx", "w") as out_file:
         for line in lines:
@@ -65,6 +65,12 @@ def main():
     print("Names added: " + str(names_added))
     print("Start a new game to populate the world with updated names")
     print("")
+
+
+def display_error(error):
+        print(error)
+        input()
+        raise SystemExit()
 
 
 if __name__ == "__main__":
