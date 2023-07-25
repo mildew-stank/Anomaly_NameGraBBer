@@ -45,6 +45,12 @@ def update_name_amount(entry_amount):
             out_file.write(line)
 
 
+def display_error(error):
+        print(error)
+        input()
+        raise SystemExit()
+
+
 def main():
     print("Authorization link:")
     print("https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=w70kisl5o6k8wsbrh8w41938vw9nk6&redirect_uri=http://localhost&scope=moderator%3Aread%3Achatters")
@@ -65,12 +71,6 @@ def main():
     print("Names added: " + str(names_added))
     print("Start a new game to populate the world with updated names")
     print("")
-
-
-def display_error(error):
-        print(error)
-        input()
-        raise SystemExit()
 
 
 if __name__ == "__main__":
